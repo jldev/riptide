@@ -130,7 +130,7 @@ public class Riptide {
 //            horizontal.homeSlides(magSwitchButton3);
 //        }
 
-        opMode.register(vertical);
+//        opMode.register(vertical);   // ADD THIS BACK WITH VERTICAL
         opMode.register(horizontal);
 
         //       gunner setup

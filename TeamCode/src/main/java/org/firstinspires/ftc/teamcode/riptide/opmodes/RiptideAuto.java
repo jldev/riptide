@@ -78,7 +78,7 @@ public class RiptideAuto {
                                 new WaitCommand(750),
                                 new RoadRunnerDrive(32, 0, riptide.drive),
                                 new InstantCommand(() -> riptide.vertical.toggleClawState()),
-                                new RoadRunnerDrive(-6, -3, riptide.drive), // y 0
+                                new RoadRunnerDrive(-12, -3, riptide.drive), // y 0
 
                                 new InstantCommand(() -> currentState = Task.PUSH_SAMPLES)
                             )
@@ -90,7 +90,7 @@ public class RiptideAuto {
                         riptide.GoWall(),
                         new SequentialCommandGroup(
                                 new RoadRunnerDrive(0, -27, riptide.drive), // y -28
-                                new RoadRunnerDrive(30, -10, riptide.drive),
+                                new RoadRunnerDrive(36, -10, riptide.drive),
                                 new RoadRunnerDrive(-46, -4, riptide.drive),
                                 new RoadRunnerDrive(43, 4, riptide.drive),
                                 new RoadRunnerDrive(0, -12, riptide.drive),
