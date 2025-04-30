@@ -198,6 +198,8 @@ public class RiptideAuto {
             case PRELOAD_BASKET:
                 opMode.schedule(new SequentialCommandGroup(
                         new RoadRunnerDrive(15, 17, 330, riptide.drive),
+//                        new RoadRunnerDrive(13, 15, riptide.drive),
+//                        new RoadRunnerTurn(75, riptide.drive),
                         riptide.GoBasket(),
                         new WaitCommand(1500),
                         new InstantCommand(() -> riptide.vertical.toggleClawState()),
@@ -215,14 +217,14 @@ public class RiptideAuto {
                         new WaitCommand(750),
                         // second deposited
                         new ParallelCommandGroup(
-                                new RoadRunnerTurn(26.5, riptide.drive),
+                                new RoadRunnerTurn(25, riptide.drive),
                                 riptide.GoSub()
                         ),
-                        new HorizontalSlideCommand(riptide.horizontal, 1000),
+                        new HorizontalSlideCommand(riptide.horizontal, 975),
                         new WaitCommand(1000),
                         riptide.horizontal.Grab(),
                         new ParallelCommandGroup(
-                                new RoadRunnerTurn(-26.5, riptide.drive),
+                                new RoadRunnerTurn(-25, riptide.drive),
                                 riptide.GoHandshake()
                         ),
                         new WaitCommand(1600),
@@ -230,16 +232,18 @@ public class RiptideAuto {
                         new WaitCommand(750),
                         // third deposited
                         new ParallelCommandGroup(
-                                new RoadRunnerTurn(53.5, riptide.drive),
+                                new RoadRunnerTurn(57, riptide.drive),
                                 riptide.GoSub()
                         ),
-                        new HorizontalSlideCommand(riptide.horizontal, 1150),
+                        new RoadRunnerDrive(0, -3.5, riptide.drive),
+                        new HorizontalSlideCommand(riptide.horizontal, 1475),
                         new WaitCommand(1000),
                         riptide.horizontal.Grab(),
                         new ParallelCommandGroup(
-                                new RoadRunnerTurn(-53.5, riptide.drive),
+                                new RoadRunnerTurn(-57, riptide.drive),
                                 riptide.GoHandshake()
                         ),
+                        new RoadRunnerDrive(0, 3.5, riptide.drive),
                         new WaitCommand(1600),
                         new InstantCommand(() -> riptide.vertical.toggleClawState())
                 ));

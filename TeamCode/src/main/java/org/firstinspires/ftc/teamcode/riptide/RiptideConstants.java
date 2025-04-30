@@ -55,7 +55,7 @@ public class RiptideConstants {
 
 
     //   CLAW GRIP VALUES
-    public static double GRIPPER_CLOSED_VALUE_VERTICAL = 0.2f;
+    public static double GRIPPER_CLOSED_VALUE_VERTICAL = 0.1f;
     public static double GRIPPER_OPEN_VALUE_VERTICAL = .5f;
     public static double GRIPPER_OPEN_VALUE_HORIZONTAL = .26f;
     public static double GRIPPER_CLOSED_VALUE_HORIZONTAL = 0.115;
@@ -106,7 +106,7 @@ public class RiptideConstants {
     public static double VERT_HANDSHAKE_ROTATION = .85;
 
     // HANG
-    public static double VERT_HANG_SHOULDER = .175;
+    public static double VERT_HANG_SHOULDER = .15;
     public static double VERT_HANG_ROTATION = 0.3f;
     public static double VERT_HANG_ELBOW = 0.21f;
 
