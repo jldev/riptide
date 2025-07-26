@@ -5,8 +5,6 @@ import static java.lang.Math.round;
 import com.arcrobotics.ftclib.command.CommandBase;
 import com.qualcomm.robotcore.hardware.Servo;
 
-import org.firstinspires.ftc.teamcode.riptide.subsystems.HorizontalSubsystem;
-
 public class ServoPositionCommand extends CommandBase {
 
     private final Servo mServo;

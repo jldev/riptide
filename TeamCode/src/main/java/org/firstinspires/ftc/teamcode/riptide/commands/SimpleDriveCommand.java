@@ -2,16 +2,16 @@ package org.firstinspires.ftc.teamcode.riptide.commands;
 
 import com.arcrobotics.ftclib.command.CommandBase;
 
-import org.firstinspires.ftc.teamcode.riptide.subsystems.MecanumDriveSubsystem;
+import org.firstinspires.ftc.teamcode.riptide.subsystems.SwerveDriveSubsystem;
 
 public class SimpleDriveCommand extends CommandBase {
 
-    private final MecanumDriveSubsystem drive;
-    private final MecanumDriveSubsystem.DriveDirection direction;
+    private final SwerveDriveSubsystem drive;
+    private final SwerveDriveSubsystem.DriveDirection direction;
     private final double distanceInches;
 
 
-    public SimpleDriveCommand(MecanumDriveSubsystem drive, MecanumDriveSubsystem.DriveDirection direction, double inches ) {
+    public SimpleDriveCommand(SwerveDriveSubsystem drive, SwerveDriveSubsystem.DriveDirection direction, double inches ) {
         this.drive = drive;
         this.direction = direction;
         this.distanceInches = inches;
