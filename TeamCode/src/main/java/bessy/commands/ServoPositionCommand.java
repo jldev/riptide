@@ -1,11 +1,9 @@
-package riptide.commands;
+package bessy.commands;
 
 import static java.lang.Math.round;
 
 import com.arcrobotics.ftclib.command.CommandBase;
 import com.qualcomm.robotcore.hardware.Servo;
-
-import riptide.subsystems.HorizontalSubsystem;
 
 public class ServoPositionCommand extends CommandBase {
 

@@ -1,4 +1,4 @@
-package riptide;
+package bessy;
 
 import com.arcrobotics.ftclib.command.button.Button;
 import com.arcrobotics.ftclib.gamepad.GamepadEx;

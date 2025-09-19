@@ -1,21 +1,20 @@
-package riptide.opmodes;
+package bessy.opmodes;
 
 import com.acmerobotics.dashboard.config.Config;
 //import com.acmerobotics.roadrunner.Pose2d;
 import com.arcrobotics.ftclib.command.CommandOpMode;
-import com.arcrobotics.ftclib.command.SequentialCommandGroup;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 
-import riptide.Riptide;
+import bessy.Bessy;
 
 @Config
 @Autonomous(group = "drive", name = "Strafe")
 public class Strafe extends CommandOpMode {
-    Riptide riptide;
+    Bessy bessy;
     private boolean started = false;
     @Override
     public void initialize() {
-        riptide = new Riptide(this, Riptide.OpModeType.AUTO, Riptide.AllianceColor.BLUE);
+        bessy = new Bessy(this, Bessy.OpModeType.AUTO, Bessy.AllianceColor.BLUE);
 //        Pose2d startPos = new Pose2d(0, 0, Math.toRadians(180));
 //        riptide.setStartPosition(startPos);
         started = false;

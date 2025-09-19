@@ -1,4 +1,4 @@
-package riptide;
+package bessy;
 
 import com.arcrobotics.ftclib.command.button.Button;
 import com.qualcomm.robotcore.hardware.DigitalChannel;

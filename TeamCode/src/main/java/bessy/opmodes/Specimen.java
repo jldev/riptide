@@ -1,24 +1,24 @@
-package riptide.opmodes;
+package bessy.opmodes;
 
 import com.acmerobotics.dashboard.config.Config;
 import com.arcrobotics.ftclib.command.CommandOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 
-import riptide.Riptide;
+import bessy.Bessy;
 
 @Config
 @Autonomous(group = "drive", name = "Specimen")
 public class Specimen extends CommandOpMode {
-    RiptideAuto riptideAuto;
+    BessyAuto bessyAuto;
     @Override
     public void initialize() {
-        riptideAuto = new RiptideAuto(this, Riptide.FieldPos.AU, Riptide.AllianceColor.RED, Riptide.Target.SPECIMENS);
-        riptideAuto.riptide.pushSamples = true;
+        bessyAuto = new BessyAuto(this, Bessy.FieldPos.AU, Bessy.AllianceColor.RED, Bessy.Target.SPECIMENS);
+        bessyAuto.bessy.pushSamples = true;
     }
 
     @Override
     public void run(){
-        riptideAuto.run();
+        bessyAuto.run();
         super.run();
     }
 }

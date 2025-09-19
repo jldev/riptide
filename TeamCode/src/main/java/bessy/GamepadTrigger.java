@@ -1,4 +1,4 @@
-package riptide;
+package bessy;
 
 import com.arcrobotics.ftclib.gamepad.GamepadEx;
 import com.arcrobotics.ftclib.gamepad.GamepadKeys;
