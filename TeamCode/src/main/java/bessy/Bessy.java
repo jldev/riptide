@@ -4,10 +4,13 @@ import com.arcrobotics.ftclib.command.CommandOpMode;
 import com.arcrobotics.ftclib.command.button.GamepadButton;
 import com.arcrobotics.ftclib.gamepad.GamepadEx;
 import com.arcrobotics.ftclib.gamepad.GamepadKeys;
+import com.arcrobotics.ftclib.hardware.motors.Motor;
+import com.arcrobotics.ftclib.hardware.motors.MotorEx;
 import com.pedropathing.follower.Follower;
 import com.pedropathing.localization.Pose;
 import com.pedropathing.util.Constants;
 
+import bessy.subsystems.IntakeSubsystem;
 import pedroPathing.constants.FConstants;
 import pedroPathing.constants.LConstants;
 import bessy.opmodes.BessyAuto;
@@ -51,6 +54,8 @@ public class Bessy {
     public Target target = Target.SPECIMENS;
     public boolean pushSamples = true;
 
+    public IntakeSubsystem intakeSubsystem;
+
     //           BUTTONSSSSS
     // Gunner
     public GamepadButton verticleSlideUp;
@@ -81,7 +86,8 @@ public BessyAuto auto;
     this.auto = auto;
     }
 
-    public Bessy(CommandOpMode opMode, OpModeType opModeType, AllianceColor ac) {
+    public
+    Bessy(CommandOpMode opMode, OpModeType opModeType, AllianceColor ac) {
         mOpMode = opMode;
         mOpModeType = opModeType;
         allianceColor = ac;
@@ -91,6 +97,11 @@ public BessyAuto auto;
         follower = new Follower(opMode.hardwareMap);
         driverOp = new GamepadEx(opMode.gamepad1);
         gunnerOp = new GamepadEx(opMode.gamepad2);
+
+
+        intakeSubsystem = new IntakeSubsystem(this, new MotorEx(opMode.hardwareMap, "intakeMotor", Motor.GoBILDA.RPM_1150), mOpMode);
+
+
 
         //       gunner setup
         //slide manual
@@ -108,8 +119,6 @@ public BessyAuto auto;
         hang_slidePreset = new GamepadButton(gunnerOp, GamepadKeys.Button.B);
         basket_slidePreset = new GamepadButton(gunnerOp, GamepadKeys.Button.Y);
 
-        horizontalClawButton = new GamepadTriggerAsButton(gunnerOp, GamepadKeys.Trigger.LEFT_TRIGGER, 0.5);
-        verticalClawButton = new GamepadTriggerAsButton(gunnerOp, GamepadKeys.Trigger.RIGHT_TRIGGER, 0.5);
         //     driver setup
 
         speed_switch_switcher = new GamepadButton(driverOp, GamepadKeys.Button.DPAD_UP);
