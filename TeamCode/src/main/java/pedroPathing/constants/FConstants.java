@@ -8,6 +8,10 @@ import com.qualcomm.robotcore.hardware.DcMotorSimple;
 
 public class FConstants {
     static {
+
+        FollowerConstants.maxPower = 1;   // CHANGE BACK TO 1 LATER
+
+
         FollowerConstants.localizers = Localizers.THREE_WHEEL;
 
         FollowerConstants.leftFrontMotorName = "leftFront";

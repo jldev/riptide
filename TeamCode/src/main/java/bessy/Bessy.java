@@ -9,8 +9,10 @@ import com.arcrobotics.ftclib.hardware.motors.MotorEx;
 import com.pedropathing.follower.Follower;
 import com.pedropathing.localization.Pose;
 import com.pedropathing.util.Constants;
+import com.qualcomm.robotcore.hardware.Servo;
 
 import bessy.subsystems.IntakeSubsystem;
+import bessy.subsystems.OuttakeSubsystem;
 import pedroPathing.constants.FConstants;
 import pedroPathing.constants.LConstants;
 import bessy.opmodes.BessyAuto;
@@ -55,21 +57,13 @@ public class Bessy {
     public boolean pushSamples = true;
 
     public IntakeSubsystem intakeSubsystem;
+    public OuttakeSubsystem outtakeSubsystem;
 
     //           BUTTONSSSSS
     // Gunner
-    public GamepadButton verticleSlideUp;
-    public GamepadButton verticleSlideDown;
-    public GamepadButton horizontalSlideOut;
-    public GamepadButton horizontalSlideIn;
-
-    public GamepadButton home_slidePreset;
-    public GamepadButton wall_slidePreset;
-    public GamepadButton hang_slidePreset;
-    public GamepadButton basket_slidePreset;
-    public GamepadButton speed_switch_switcher;
-    public GamepadTriggerAsButton horizontalClawButton;
-    public GamepadTriggerAsButton verticalClawButton;
+    public GamepadButton leftOuttakeServo;
+    public GamepadButton rightOuttakeServo;
+    public GamepadButton allOuttakeServo;
 
     // Driver
 
@@ -100,28 +94,20 @@ public BessyAuto auto;
 
 
         intakeSubsystem = new IntakeSubsystem(this, new MotorEx(opMode.hardwareMap, "intakeMotor", Motor.GoBILDA.RPM_1150), mOpMode);
+        outtakeSubsystem = new OuttakeSubsystem(this, new MotorEx(opMode.hardwareMap,
+                "outtakeMotor", Motor.GoBILDA.RPM_1150),opMode.hardwareMap.get(Servo.class, "leftServo"),
+                opMode.hardwareMap.get(Servo.class, "rightServo"), mOpMode);
 
 
 
-        //       gunner setup
-        //slide manual
-        verticleSlideUp = new GamepadButton(gunnerOp, GamepadKeys.Button.DPAD_UP);
-        verticleSlideDown = new GamepadButton(gunnerOp, GamepadKeys.Button.DPAD_DOWN);
+        //       GUNNER SETUP
 
-        horizontalSlideOut = new GamepadButton(gunnerOp, GamepadKeys.Button.DPAD_LEFT);
-        horizontalSlideIn = new GamepadButton(gunnerOp, GamepadKeys.Button.DPAD_RIGHT);
-
-//        horizontalClawDown = new GamepadButton(gunnerOp, GamepadKeys.Button.LEFT_BUMPER);
-
-           // presets
-        home_slidePreset = new GamepadButton(gunnerOp, GamepadKeys.Button.A);
-        wall_slidePreset = new GamepadButton(gunnerOp, GamepadKeys.Button.X);
-        hang_slidePreset = new GamepadButton(gunnerOp, GamepadKeys.Button.B);
-        basket_slidePreset = new GamepadButton(gunnerOp, GamepadKeys.Button.Y);
+        //outtake servos
+        leftOuttakeServo = new GamepadButton(gunnerOp, GamepadKeys.Button.A);
+        rightOuttakeServo = new GamepadButton(gunnerOp, GamepadKeys.Button.B);
+        allOuttakeServo = new GamepadButton(gunnerOp, GamepadKeys.Button.Y);
 
         //     driver setup
-
-        speed_switch_switcher = new GamepadButton(driverOp, GamepadKeys.Button.DPAD_UP);
 
     }
 

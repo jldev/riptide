@@ -1,9 +1,13 @@
 package bessy.opmodes;
 
 import com.arcrobotics.ftclib.command.CommandOpMode;
+import com.arcrobotics.ftclib.command.InstantCommand;
+import com.arcrobotics.ftclib.command.ParallelCommandGroup;
+import com.arcrobotics.ftclib.command.WaitCommand;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
 import bessy.Bessy;
+import bessy.subsystems.OuttakeSubsystem;
 
 
 //values
@@ -38,6 +42,23 @@ public class Teleop extends CommandOpMode {
         bessy.follower.startTeleopDrive();
 
         // THIS IS WHERE ALL THE BUTTONS FOR TELEOP GO
+        bessy.leftOuttakeServo.whenPressed(new ParallelCommandGroup(
+                new InstantCommand(() -> bessy.outtakeSubsystem.activeServo = OuttakeSubsystem.ActiveServo.LEFT),
+                new WaitCommand(500),
+                new InstantCommand(() -> bessy.outtakeSubsystem.activeServo = OuttakeSubsystem.ActiveServo.NULL)
+                ));
+
+        bessy.rightOuttakeServo.whenPressed(new ParallelCommandGroup(
+                new InstantCommand(() -> bessy.outtakeSubsystem.activeServo = OuttakeSubsystem.ActiveServo.RIGHT),
+                new WaitCommand(500),
+                new InstantCommand(() -> bessy.outtakeSubsystem.activeServo = OuttakeSubsystem.ActiveServo.NULL)
+        ));
+
+        bessy.allOuttakeServo.whenPressed(new ParallelCommandGroup(
+                new InstantCommand(() -> bessy.outtakeSubsystem.activeServo = OuttakeSubsystem.ActiveServo.ALL),
+                new WaitCommand(500),
+                new InstantCommand(() -> bessy.outtakeSubsystem.activeServo = OuttakeSubsystem.ActiveServo.NULL)
+        ));
     }
 
     @Override
@@ -51,7 +72,7 @@ public class Teleop extends CommandOpMode {
         - Robot-Centric Mode: true
         */
 
-        bessy.follower.setTeleOpMovementVectors(-gamepad1.left_stick_y, -gamepad1.left_stick_x, -gamepad1.right_stick_x, true);
+        bessy.follower.setTeleOpMovementVectors(-gamepad1.left_stick_y, gamepad1.left_stick_x, -gamepad1.right_stick_x, true);
         bessy.follower.update();
 
         /* Telemetry Outputs of our Follower */

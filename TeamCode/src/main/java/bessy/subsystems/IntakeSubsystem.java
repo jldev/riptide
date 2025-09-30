@@ -60,7 +60,7 @@ public class IntakeSubsystem extends SubsystemBase {
         } else {
             currentState = IntakeState.IDLE;
         }
-        if(mBessy.gunnerOp.getTrigger(GamepadKeys.Trigger.RIGHT_TRIGGER) > 0.1)
+        if(mBessy.gunnerOp.getButton(GamepadKeys.Button.DPAD_DOWN))
             currentState = IntakeState.REVERSE;
 
 
