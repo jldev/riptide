@@ -103,7 +103,7 @@ public BessyAuto auto;
         //       GUNNER SETUP
 
         //outtake servos
-        leftOuttakeServo = new GamepadButton(gunnerOp, GamepadKeys.Button.A);
+        leftOuttakeServo = new GamepadButton(gunnerOp, GamepadKeys.Button.X);
         rightOuttakeServo = new GamepadButton(gunnerOp, GamepadKeys.Button.B);
         allOuttakeServo = new GamepadButton(gunnerOp, GamepadKeys.Button.Y);
 

@@ -48,7 +48,7 @@ public class OuttakeSubsystem extends SubsystemBase {
         mOuttakeMotor.setRunMode(MotorEx.RunMode.RawPower);
         mOuttakeMotor.setZeroPowerBehavior(Motor.ZeroPowerBehavior.BRAKE);
 
-        mOuttakeMotor.motor.setDirection(DcMotorSimple.Direction.FORWARD);
+        mOuttakeMotor.motor.setDirection(DcMotorSimple.Direction.REVERSE);
         mOuttakeMotor.encoder.setDirection(Motor.Direction.REVERSE);
 
         opmode.telemetry.addLine("Outtake Init");
@@ -69,7 +69,7 @@ public class OuttakeSubsystem extends SubsystemBase {
 
 
         if(currentState == OuttakeState.ACTIVE){
-            mOuttakeMotor.set(1);
+            mOuttakeMotor.set(.55);
         } else {
             if(currentState == OuttakeState.IDLE){
                 mOuttakeMotor.set(0);
