@@ -69,7 +69,7 @@ public class OuttakeSubsystem extends SubsystemBase {
 
 
         if(currentState == OuttakeState.ACTIVE){
-            mOuttakeMotor.set(.55);
+            mOuttakeMotor.set(.65);
         } else {
             if(currentState == OuttakeState.IDLE){
                 mOuttakeMotor.set(0);
