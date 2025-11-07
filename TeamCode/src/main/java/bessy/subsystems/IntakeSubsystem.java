@@ -55,7 +55,8 @@ public class IntakeSubsystem extends SubsystemBase {
     @Override
     public void periodic() {
 
-        if(mBessy.gunnerOp.getTrigger(GamepadKeys.Trigger.LEFT_TRIGGER) > 0.1){
+        // the driverOp check is temp for testing.q
+        if(mBessy.gunnerOp.getTrigger(GamepadKeys.Trigger.LEFT_TRIGGER) > 0.1 || mBessy.driverOp.getTrigger(GamepadKeys.Trigger.LEFT_TRIGGER) > 0.1){
             currentState = IntakeState.INTAKE;
         } else {
             currentState = IntakeState.IDLE;

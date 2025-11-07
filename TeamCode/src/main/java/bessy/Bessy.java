@@ -107,7 +107,7 @@ public BessyAuto auto;
         rightOuttakeServo = new GamepadButton(gunnerOp, GamepadKeys.Button.B);
         allOuttakeServo = new GamepadButton(gunnerOp, GamepadKeys.Button.Y);
 
-        //     driver setup
+        //     DRIVER SETUP
 
     }
 

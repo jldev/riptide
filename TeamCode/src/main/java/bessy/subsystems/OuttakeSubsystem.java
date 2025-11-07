@@ -12,6 +12,7 @@ import com.qualcomm.robotcore.hardware.Servo;
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 
 import bessy.Bessy;
+import bessy.BessyConstants;
 
 public class OuttakeSubsystem extends SubsystemBase {
     //private final Trigger encoderStopTrigger;
@@ -69,7 +70,7 @@ public class OuttakeSubsystem extends SubsystemBase {
 
 
         if(currentState == OuttakeState.ACTIVE){
-            mOuttakeMotor.set(.65);
+            mOuttakeMotor.set(.8);
         } else {
             if(currentState == OuttakeState.IDLE){
                 mOuttakeMotor.set(0);
@@ -79,14 +80,14 @@ public class OuttakeSubsystem extends SubsystemBase {
 
 
         if(activeServo == ActiveServo.LEFT){
-            mLeftServo.setPosition(0);
-            mRightServo.setPosition(0);
+            mLeftServo.setPosition(BessyConstants.LEFT_SERVO_LAUNCH_POSITION);
+            mRightServo.setPosition(BessyConstants.RIGHT_SERVO_IDLE_POSITION);
         } else if(activeServo == ActiveServo.RIGHT){
-            mLeftServo.setPosition(0);
-            mRightServo.setPosition(0);
+            mLeftServo.setPosition(BessyConstants.LEFT_SERVO_IDLE_POSITION);
+            mRightServo.setPosition(BessyConstants.RIGHT_SERVO_LAUNCH_POSITION);
         } else if(activeServo == ActiveServo.ALL){
-            mLeftServo.setPosition(0);
-            mRightServo.setPosition(0);
+            mLeftServo.setPosition(BessyConstants.LEFT_SERVO_LAUNCH_POSITION);
+            mRightServo.setPosition(BessyConstants.RIGHT_SERVO_LAUNCH_POSITION);
         } else{
             mLeftServo.setPosition(0);
             mRightServo.setPosition(0);

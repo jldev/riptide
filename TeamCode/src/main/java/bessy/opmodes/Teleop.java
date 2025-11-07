@@ -43,21 +43,23 @@ public class Teleop extends CommandOpMode {
         bessy.follower.startTeleopDrive();
 
         // THIS IS WHERE ALL THE BUTTONS FOR TELEOP GO
+
+        //     Outtake Servo States
         bessy.leftOuttakeServo.whenPressed(new SequentialCommandGroup(
                 new InstantCommand(() -> bessy.outtakeSubsystem.activeServo = OuttakeSubsystem.ActiveServo.LEFT),
-                new WaitCommand(1000),
+                new WaitCommand(350),
                 new InstantCommand(() -> bessy.outtakeSubsystem.activeServo = OuttakeSubsystem.ActiveServo.NULL)
                 ));
 
         bessy.rightOuttakeServo.whenPressed(new SequentialCommandGroup(
                 new InstantCommand(() -> bessy.outtakeSubsystem.activeServo = OuttakeSubsystem.ActiveServo.RIGHT),
-                new WaitCommand(1000),
+                new WaitCommand(350),
                 new InstantCommand(() -> bessy.outtakeSubsystem.activeServo = OuttakeSubsystem.ActiveServo.NULL)
         ));
 
         bessy.allOuttakeServo.whenPressed(new SequentialCommandGroup(
                 new InstantCommand(() -> bessy.outtakeSubsystem.activeServo = OuttakeSubsystem.ActiveServo.ALL),
-                new WaitCommand(1000),
+                new WaitCommand(350),
                 new InstantCommand(() -> bessy.outtakeSubsystem.activeServo = OuttakeSubsystem.ActiveServo.NULL)
         ));
     }
