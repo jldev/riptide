@@ -1,18 +1,15 @@
 package bessy.opmodes;
 
 import com.acmerobotics.dashboard.config.Config;
-//import com.acmerobotics.roadrunner.Pose2d;
 import com.arcrobotics.ftclib.command.CommandOpMode;
-import com.arcrobotics.ftclib.command.InstantCommand;
-import com.pedropathing.commands.FollowPath;
-import com.pedropathing.localization.Pose;
-import com.pedropathing.pathgen.BezierCurve;
-import com.pedropathing.pathgen.BezierLine;
-import com.pedropathing.pathgen.Path;
-import com.pedropathing.pathgen.Point;
+import com.pedropathing.geometry.BezierLine;
+import com.pedropathing.geometry.Pose;
+import com.pedropathing.paths.Path;
+import com.pedropathing.paths.PathChain;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 
 import bessy.Bessy;
+import bessy.commands.PedroFollowPath;
 
 @Config
 @Autonomous(group = "drive", name = "BacknForth")
@@ -43,16 +40,14 @@ public class BacknForth extends CommandOpMode {
             telemetry.addLine("Started");
             telemetry.update();
 
-//            Path forward = new Path(new BezierLine(new Point(startPose), new Point(scorePose)));
-//            Path forward = new Path(new BezierLine(new Point(bessy.follower.getPose().getX(), bessy.follower.getPose().getY()), new Point(bessy.follower.getPose().getX(), bessy.follower.getPose().getY() + 10)));
-
-            Path forward = new Path(new BezierLine(new Point(testWaypointA), new Point(testWaypointB)));
-            this.schedule(new FollowPath(bessy.follower, forward)); // josh has this
-//            bessy.follower.followPath(forward);
+            Path forward = new Path(new BezierLine(testWaypointA, testWaypointB));
+            PathChain pathChain = bessy.follower.pathBuilder().addPath(forward).build();
+            // you can keep adding paths here check https://pedropathing.com/docs/pathing/reference/path-builder
+            this.schedule(new PedroFollowPath(bessy.follower, pathChain));
         }
 
-//        telemetry.addLine(String.format("Pose X: %.2f, Y: %.2f, Rot: %.2f", riptide.drive.getPoseEstimate().position.x,
-//                riptide.drive.getPoseEstimate().position.y, Math.toDegrees(riptide.drive.getPoseEstimate().heading.toDouble())));
+        telemetry.addLine(String.format("Pose X: %.2f, Y: %.2f, Rot: %.2f", bessy.follower.getPose().getX(),
+                bessy.follower.getPose().getY(), Math.toDegrees(bessy.follower.getPose().getHeading())));
         telemetry.update();
         bessy.follower.update();
         super.run();

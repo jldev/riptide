@@ -73,7 +73,7 @@ public class Teleop extends CommandOpMode {
         - Robot-Centric Mode: true
         */
 
-        bessy.follower.setTeleOpMovementVectors(-gamepad1.left_stick_y, gamepad1.left_stick_x, -gamepad1.right_stick_x, true);
+        bessy.follower.setTeleOpDrive(-gamepad1.left_stick_y, gamepad1.left_stick_x, -gamepad1.right_stick_x, true);
         bessy.follower.update();
 
         /* Telemetry Outputs of our Follower */
