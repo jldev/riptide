@@ -1,7 +1,7 @@
 package bessy.opmodes;
 
 import com.arcrobotics.ftclib.command.CommandOpMode;
-import com.pedropathing.localization.Pose;
+import com.pedropathing.geometry.Pose;
 
 import bessy.Bessy;
 

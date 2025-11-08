@@ -17,6 +17,7 @@ android {
     buildFeatures {
         buildConfig = true
     }
+
     compileSdkVersion 30
 
     compileOptions {

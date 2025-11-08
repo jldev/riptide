@@ -7,15 +7,13 @@ import com.arcrobotics.ftclib.gamepad.GamepadKeys;
 import com.arcrobotics.ftclib.hardware.motors.Motor;
 import com.arcrobotics.ftclib.hardware.motors.MotorEx;
 import com.pedropathing.follower.Follower;
-import com.pedropathing.localization.Pose;
-import com.pedropathing.util.Constants;
+import com.pedropathing.geometry.Pose;
 import com.qualcomm.robotcore.hardware.Servo;
 
 import bessy.subsystems.IntakeSubsystem;
 import bessy.subsystems.OuttakeSubsystem;
-import pedroPathing.constants.FConstants;
-import pedroPathing.constants.LConstants;
 import bessy.opmodes.BessyAuto;
+import pedroPathing.Constants;
 
 public class Bessy {
 
@@ -85,10 +83,7 @@ public BessyAuto auto;
         mOpMode = opMode;
         mOpModeType = opModeType;
         allianceColor = ac;
-//        Pose2d initialPose = new Pose2d(12, -62, Math.toRadians(90));
-//        drive = new MecanumDriveSubsystem(new MecanumDrive(opMode.hardwareMap, initialPose), false);
-        Constants.setConstants(FConstants.class, LConstants.class);
-        follower = new Follower(opMode.hardwareMap);
+        follower = Constants.createFollower(opMode.hardwareMap);
         driverOp = new GamepadEx(opMode.gamepad1);
         gunnerOp = new GamepadEx(opMode.gamepad2);
 

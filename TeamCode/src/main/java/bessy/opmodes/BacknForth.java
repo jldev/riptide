@@ -24,14 +24,14 @@ public class BacknForth extends CommandOpMode {
     private final Pose scorePose = new Pose(60, 96, Math.toRadians(90)); // Scoring Pose of our robot. It is facing the goal at a 135 degree angle.
 
     private final Pose testWaypointA = new Pose(0, 0, Math.toRadians(0));
-    private final Pose testWaypointB = new Pose(24, 0, Math.toRadians(0));
+    private final Pose testWaypointB = new Pose(0, 10, Math.toRadians(0));
 
     @Override
     public void initialize() {
         bessy = new Bessy(this, Bessy.OpModeType.AUTO, Bessy.AllianceColor.RED);
 //        Pose2d startPos = new Pose2d(0, 0, Math.toRadians(180));
 //        riptide.setStartPosition(startPos);
-        bessy.setStartPosition(testWaypointA);
+        bessy.setStartPosition(new Pose(0, 0, 0));
         started = false;
     }
 
@@ -46,18 +46,13 @@ public class BacknForth extends CommandOpMode {
 //            Path forward = new Path(new BezierLine(new Point(startPose), new Point(scorePose)));
 //            Path forward = new Path(new BezierLine(new Point(bessy.follower.getPose().getX(), bessy.follower.getPose().getY()), new Point(bessy.follower.getPose().getX(), bessy.follower.getPose().getY() + 10)));
 
-            Path forward = new Path(new BezierCurve(new Point(testWaypointA), new Point(testWaypointB)));
+            Path forward = new Path(new BezierLine(new Point(testWaypointA), new Point(testWaypointB)));
             this.schedule(new FollowPath(bessy.follower, forward)); // josh has this
 //            bessy.follower.followPath(forward);
         }
 
 //        telemetry.addLine(String.format("Pose X: %.2f, Y: %.2f, Rot: %.2f", riptide.drive.getPoseEstimate().position.x,
 //                riptide.drive.getPoseEstimate().position.y, Math.toDegrees(riptide.drive.getPoseEstimate().heading.toDouble())));
-
-
-        telemetry.addData("X", bessy.follower.getPose().getX());
-        telemetry.addData("Y", bessy.follower.getPose().getY());
-        telemetry.addData("Heading in Degrees", Math.toDegrees(bessy.follower.getPose().getHeading()));
         telemetry.update();
         bessy.follower.update();
         super.run();
