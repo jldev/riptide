@@ -10,6 +10,7 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 
 import bessy.Bessy;
 import bessy.commands.PedroFollowPath;
+import bessy.subsystems.OuttakeSubsystem;
 
 @Config
 @Autonomous(group = "drive", name = "BacknForth")
@@ -50,6 +51,7 @@ public class BacknForth extends CommandOpMode {
             PathChain pathChain = bessy.follower.pathBuilder().addPath(testA).addPath(testB).build();
             // you can keep adding paths here check https://pedropathing.com/docs/pathing/reference/path-builder
             this.schedule(new PedroFollowPath(bessy.follower, pathChain));
+//            this.schedule(bessy.Launch(OuttakeSubsystem.ActiveServo.ALL));
         }
 
         telemetry.addLine(String.format("Pose X: %.2f, Y: %.2f, Rot: %.2f", bessy.follower.getPose().getX(),

@@ -45,23 +45,12 @@ public class Teleop extends CommandOpMode {
         // THIS IS WHERE ALL THE BUTTONS FOR TELEOP GO
 
         //     Outtake Servo States
-        bessy.leftOuttakeServo.whenPressed(new SequentialCommandGroup(
-                new InstantCommand(() -> bessy.outtakeSubsystem.activeServo = OuttakeSubsystem.ActiveServo.LEFT),
-                new WaitCommand(350),
-                new InstantCommand(() -> bessy.outtakeSubsystem.activeServo = OuttakeSubsystem.ActiveServo.NULL)
-                ));
+//        bessy.leftOuttakeServo.whenPressed(new InstantCommand(() -> bessy.outtakeSubsystem.ActivateServo(OuttakeSubsystem.ActiveServo.LEFT)));
+        bessy.leftOuttakeServo.whenPressed(bessy.outtakeSubsystem.ActivateServo(OuttakeSubsystem.ActiveServo.LEFT));
 
-        bessy.rightOuttakeServo.whenPressed(new SequentialCommandGroup(
-                new InstantCommand(() -> bessy.outtakeSubsystem.activeServo = OuttakeSubsystem.ActiveServo.RIGHT),
-                new WaitCommand(350),
-                new InstantCommand(() -> bessy.outtakeSubsystem.activeServo = OuttakeSubsystem.ActiveServo.NULL)
-        ));
+        bessy.rightOuttakeServo.whenPressed(bessy.outtakeSubsystem.ActivateServo(OuttakeSubsystem.ActiveServo.RIGHT));
 
-        bessy.allOuttakeServo.whenPressed(new SequentialCommandGroup(
-                new InstantCommand(() -> bessy.outtakeSubsystem.activeServo = OuttakeSubsystem.ActiveServo.ALL),
-                new WaitCommand(350),
-                new InstantCommand(() -> bessy.outtakeSubsystem.activeServo = OuttakeSubsystem.ActiveServo.NULL)
-        ));
+        bessy.allOuttakeServo.whenPressed(bessy.outtakeSubsystem.ActivateServo(OuttakeSubsystem.ActiveServo.ALL));
     }
 
     @Override

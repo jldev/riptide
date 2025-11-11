@@ -30,7 +30,7 @@ public class IntakeSubsystem extends SubsystemBase {
         INTAKE,
         REVERSE
     }
-    private IntakeState currentState;
+    public IntakeState currentState;
 
     private final MotorEx mIntakeMotor;
 
@@ -56,13 +56,16 @@ public class IntakeSubsystem extends SubsystemBase {
     public void periodic() {
 
         // the driverOp check is temp for testing.q
-        if(mBessy.gunnerOp.getTrigger(GamepadKeys.Trigger.LEFT_TRIGGER) > 0.1 || mBessy.driverOp.getTrigger(GamepadKeys.Trigger.LEFT_TRIGGER) > 0.1){
-            currentState = IntakeState.INTAKE;
-        } else {
-            currentState = IntakeState.IDLE;
+        if(mBessy.mOpModeType == Bessy.OpModeType.TELEOP)
+        {
+            if(mBessy.gunnerOp.getTrigger(GamepadKeys.Trigger.LEFT_TRIGGER) > 0.1 || mBessy.driverOp.getTrigger(GamepadKeys.Trigger.LEFT_TRIGGER) > 0.1){
+                currentState = IntakeState.INTAKE;
+            } else {
+                currentState = IntakeState.IDLE;
+            }
+            if(mBessy.gunnerOp.getButton(GamepadKeys.Button.DPAD_DOWN))
+                currentState = IntakeState.REVERSE;
         }
-        if(mBessy.gunnerOp.getButton(GamepadKeys.Button.DPAD_DOWN))
-            currentState = IntakeState.REVERSE;
 
 
 

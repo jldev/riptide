@@ -1,6 +1,10 @@
 package bessy;
 
+import com.arcrobotics.ftclib.command.Command;
 import com.arcrobotics.ftclib.command.CommandOpMode;
+import com.arcrobotics.ftclib.command.InstantCommand;
+import com.arcrobotics.ftclib.command.SequentialCommandGroup;
+import com.arcrobotics.ftclib.command.WaitCommand;
 import com.arcrobotics.ftclib.command.button.GamepadButton;
 import com.arcrobotics.ftclib.gamepad.GamepadEx;
 import com.arcrobotics.ftclib.gamepad.GamepadKeys;
@@ -123,4 +127,13 @@ public BessyAuto auto;
     }
 
     //preset commands and whatever else can go here
+
+    public Command Launch(OuttakeSubsystem.ActiveServo servo){
+        return new SequentialCommandGroup(
+                new InstantCommand(() -> outtakeSubsystem.currentState = OuttakeSubsystem.OuttakeState.ACTIVE),
+                new WaitCommand(3000),
+                outtakeSubsystem.ActivateServo(servo),
+                new InstantCommand(() -> outtakeSubsystem.currentState = OuttakeSubsystem.OuttakeState.IDLE)
+        );
+    }
 }

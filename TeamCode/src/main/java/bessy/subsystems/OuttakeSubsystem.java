@@ -1,8 +1,12 @@
 package bessy.subsystems;
 
 
+import com.arcrobotics.ftclib.command.Command;
 import com.arcrobotics.ftclib.command.CommandOpMode;
+import com.arcrobotics.ftclib.command.InstantCommand;
+import com.arcrobotics.ftclib.command.SequentialCommandGroup;
 import com.arcrobotics.ftclib.command.SubsystemBase;
+import com.arcrobotics.ftclib.command.WaitCommand;
 import com.arcrobotics.ftclib.gamepad.GamepadKeys;
 import com.arcrobotics.ftclib.hardware.motors.Motor;
 import com.arcrobotics.ftclib.hardware.motors.MotorEx;
@@ -30,7 +34,7 @@ public class OuttakeSubsystem extends SubsystemBase {
         RIGHT,
         ALL
     }
-    private OuttakeState currentState;
+    public OuttakeState currentState;
     public ActiveServo activeServo;
 
     private final MotorEx mOuttakeMotor;
@@ -62,10 +66,13 @@ public class OuttakeSubsystem extends SubsystemBase {
     @Override
     public void periodic() {
 
-        if(mBessy.gunnerOp.getTrigger(GamepadKeys.Trigger.RIGHT_TRIGGER) > 0.1){
-            currentState = OuttakeState.ACTIVE;
-        } else {
-            currentState = OuttakeState.IDLE;
+        if(mBessy.mOpModeType == Bessy.OpModeType.TELEOP)  //purely teleop control
+        {
+            if (mBessy.gunnerOp.getTrigger(GamepadKeys.Trigger.RIGHT_TRIGGER) > 0.1) {
+                currentState = OuttakeState.ACTIVE;
+            } else {
+                currentState = OuttakeState.IDLE;
+            }
         }
 
 
@@ -89,13 +96,22 @@ public class OuttakeSubsystem extends SubsystemBase {
             mLeftServo.setPosition(BessyConstants.LEFT_SERVO_LAUNCH_POSITION);
             mRightServo.setPosition(BessyConstants.RIGHT_SERVO_LAUNCH_POSITION);
         } else{
-            mLeftServo.setPosition(0);
-            mRightServo.setPosition(0);
+            mLeftServo.setPosition(BessyConstants.LEFT_SERVO_IDLE_POSITION);
+            mRightServo.setPosition(BessyConstants.RIGHT_SERVO_IDLE_POSITION);
         }
 
 
         mOpMode.telemetry.addData("ActiveServo: ", activeServo);
         mOpMode.telemetry.update();
+    }
+
+
+    public Command ActivateServo(ActiveServo servo){
+        return new SequentialCommandGroup(
+                new InstantCommand(() -> activeServo = servo),
+                new WaitCommand(350),
+                new InstantCommand(() -> activeServo = OuttakeSubsystem.ActiveServo.NULL)
+        );
     }
     public void addTelemetry(Telemetry telemetry){
         mOpMode.telemetry.addData("CurrentState: ", currentState);
