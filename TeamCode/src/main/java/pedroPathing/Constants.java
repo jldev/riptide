@@ -42,18 +42,18 @@ public class Constants {
 
     public static ThreeWheelConstants localizerConstants =
             new ThreeWheelConstants()
-                    .forwardTicksToInches(.001)
-                    .strafeTicksToInches(.004625)
+                    .forwardTicksToInches(.0011)
+                    .strafeTicksToInches(.0011)
                     .turnTicksToInches(.001)
                     .leftPodY(6.25)
                     .rightPodY(-6)
-                    .strafePodX(3.0)
+                    .strafePodX(-3.0)
                     .leftEncoder_HardwareMapName("leftFront")
                     .rightEncoder_HardwareMapName("rightRear")
                     .strafeEncoder_HardwareMapName("strafeEncoder")
                     .leftEncoderDirection(Encoder.REVERSE)
                     .rightEncoderDirection(Encoder.FORWARD)
-                    .strafeEncoderDirection(Encoder.REVERSE);
+                    .strafeEncoderDirection(Encoder.FORWARD);
 
     public static PathConstraints pathConstraints = new PathConstraints(
             0.995,
@@ -69,4 +69,17 @@ public class Constants {
                 .pathConstraints(pathConstraints)
                 .build();
     }
+
+    //    com.pedropathing.localization.constants.ThreeWheelConstants.forwardTicksToInches = .0011;
+//    com.pedropathing.localization.constants.ThreeWheelConstants.strafeTicksToInches = -.0011;
+//    com.pedropathing.localization.constants.ThreeWheelConstants.turnTicksToInches = .001;
+//    com.pedropathing.localization.constants.ThreeWheelConstants.leftY = 6.25;
+//    com.pedropathing.localization.constants.ThreeWheelConstants.rightY = -6;
+//    com.pedropathing.localization.constants.ThreeWheelConstants.strafeX = -3.0;
+//    com.pedropathing.localization.constants.ThreeWheelConstants.leftEncoder_HardwareMapName = "leftFront";
+//    com.pedropathing.localization.constants.ThreeWheelConstants.rightEncoder_HardwareMapName = "rightRear";
+//    com.pedropathing.localization.constants.ThreeWheelConstants.strafeEncoder_HardwareMapName = "strafeEncoder";
+//    com.pedropathing.localization.constants.ThreeWheelConstants.leftEncoderDirection = com.pedropathing.localization.Encoder.REVERSE;
+//    com.pedropathing.localization.constants.ThreeWheelConstants.rightEncoderDirection = com.pedropathing.localization.Encoder.FORWARD;
+//    com.pedropathing.localization.constants.ThreeWheelConstants.strafeEncoderDirection = com.pedropathing.localization.Encoder.FORWARD;
 }
