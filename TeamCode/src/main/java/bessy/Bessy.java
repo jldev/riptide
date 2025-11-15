@@ -66,6 +66,8 @@ public class Bessy {
     public GamepadButton leftOuttakeServo;
     public GamepadButton rightOuttakeServo;
     public GamepadButton allOuttakeServo;
+    public GamepadButton outtakePowerIncrease;
+    public GamepadButton outtakePowerDecrease;
 
     // Driver
 
@@ -101,10 +103,14 @@ public BessyAuto auto;
 
         //       GUNNER SETUP
 
-        //outtake servos
+        //     Outtake Servo States
         leftOuttakeServo = new GamepadButton(gunnerOp, GamepadKeys.Button.X);
         rightOuttakeServo = new GamepadButton(gunnerOp, GamepadKeys.Button.B);
         allOuttakeServo = new GamepadButton(gunnerOp, GamepadKeys.Button.Y);
+
+        //     Outtake Speed Control
+        outtakePowerIncrease = new GamepadButton(gunnerOp, GamepadKeys.Button.DPAD_UP);
+        outtakePowerDecrease = new GamepadButton(gunnerOp, GamepadKeys.Button.DPAD_DOWN);
 
         //     DRIVER SETUP
 

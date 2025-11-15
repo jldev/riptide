@@ -26,6 +26,7 @@ public class OuttakeSubsystem extends SubsystemBase {
     public enum OuttakeState {
         IDLE,
         ACTIVE,
+        REVERSE
     }
 
     public enum ActiveServo {
@@ -41,6 +42,8 @@ public class OuttakeSubsystem extends SubsystemBase {
 
     private final Servo mLeftServo;
     private final Servo mRightServo;
+
+    public double outtakePower = 0.62;
 
     public OuttakeSubsystem(Bessy bessy, MotorEx outtakeMotor, Servo leftServo, Servo rightServo, CommandOpMode opmode) {
         mBessy = bessy;
@@ -70,15 +73,21 @@ public class OuttakeSubsystem extends SubsystemBase {
         {
             if (mBessy.gunnerOp.getTrigger(GamepadKeys.Trigger.RIGHT_TRIGGER) > 0.1) {
                 currentState = OuttakeState.ACTIVE;
+            } else if (mBessy.gunnerOp.getButton(GamepadKeys.Button.RIGHT_BUMPER)){
+            currentState = OuttakeState.REVERSE;
             } else {
-                currentState = OuttakeState.IDLE;
-            }
+            currentState = OuttakeState.IDLE;
+        }
         }
 
 
         if(currentState == OuttakeState.ACTIVE){
-            mOuttakeMotor.set(.8);
-        } else {
+            mOuttakeMotor.motor.setDirection(DcMotorSimple.Direction.REVERSE);
+            mOuttakeMotor.set(.62);
+        } else if(currentState == OuttakeState.REVERSE){
+            mOuttakeMotor.motor.setDirection(DcMotorSimple.Direction.FORWARD);
+            mOuttakeMotor.set(.5);
+        }else {
             if(currentState == OuttakeState.IDLE){
                 mOuttakeMotor.set(0);
             }
@@ -113,6 +122,11 @@ public class OuttakeSubsystem extends SubsystemBase {
                 new InstantCommand(() -> activeServo = OuttakeSubsystem.ActiveServo.NULL)
         );
     }
+
+    public  Command ChangePowerBy(double amount){
+        return new InstantCommand(() -> outtakePower += amount);
+    }
+
     public void addTelemetry(Telemetry telemetry){
         mOpMode.telemetry.addData("CurrentState: ", currentState);
     }

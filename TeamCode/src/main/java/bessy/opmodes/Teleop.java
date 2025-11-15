@@ -45,12 +45,14 @@ public class Teleop extends CommandOpMode {
         // THIS IS WHERE ALL THE BUTTONS FOR TELEOP GO
 
         //     Outtake Servo States
-//        bessy.leftOuttakeServo.whenPressed(new InstantCommand(() -> bessy.outtakeSubsystem.ActivateServo(OuttakeSubsystem.ActiveServo.LEFT)));
         bessy.leftOuttakeServo.whenPressed(bessy.outtakeSubsystem.ActivateServo(OuttakeSubsystem.ActiveServo.LEFT));
-
         bessy.rightOuttakeServo.whenPressed(bessy.outtakeSubsystem.ActivateServo(OuttakeSubsystem.ActiveServo.RIGHT));
-
         bessy.allOuttakeServo.whenPressed(bessy.outtakeSubsystem.ActivateServo(OuttakeSubsystem.ActiveServo.ALL));
+
+        //     Outtake Speed Control
+        bessy.outtakePowerIncrease.whenPressed(bessy.outtakeSubsystem.ChangePowerBy(.1));
+        bessy.outtakePowerDecrease.whenPressed(bessy.outtakeSubsystem.ChangePowerBy(-.1));
+
     }
 
     @Override
