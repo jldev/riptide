@@ -43,7 +43,7 @@ public class OuttakeSubsystem extends SubsystemBase {
     private final Servo mLeftServo;
     private final Servo mRightServo;
 
-    public double outtakePower = 0.62;
+    public double outtakePower = .8;
 
     public OuttakeSubsystem(Bessy bessy, MotorEx outtakeMotor, Servo leftServo, Servo rightServo, CommandOpMode opmode) {
         mBessy = bessy;
@@ -64,6 +64,8 @@ public class OuttakeSubsystem extends SubsystemBase {
 
         currentState = OuttakeState.IDLE;
         activeServo = ActiveServo.NULL;
+
+        outtakePower = BessyConstants.OUTTAKE_POWER_DEFAULT;
     }
 
     @Override
@@ -83,7 +85,7 @@ public class OuttakeSubsystem extends SubsystemBase {
 
         if(currentState == OuttakeState.ACTIVE){
             mOuttakeMotor.motor.setDirection(DcMotorSimple.Direction.REVERSE);
-            mOuttakeMotor.set(.62);
+            mOuttakeMotor.set(outtakePower);
         } else if(currentState == OuttakeState.REVERSE){
             mOuttakeMotor.motor.setDirection(DcMotorSimple.Direction.FORWARD);
             mOuttakeMotor.set(.5);
