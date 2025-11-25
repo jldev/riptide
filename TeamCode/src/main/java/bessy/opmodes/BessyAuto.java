@@ -1,9 +1,13 @@
 package bessy.opmodes;
 
 import com.arcrobotics.ftclib.command.CommandOpMode;
+import com.pedropathing.geometry.BezierLine;
 import com.pedropathing.geometry.Pose;
+import com.pedropathing.paths.Path;
+import com.pedropathing.paths.PathChain;
 
 import bessy.Bessy;
+import bessy.commands.PedroFollowPath;
 
 public class BessyAuto {
 
@@ -11,8 +15,6 @@ public class BessyAuto {
 
     private CommandOpMode opMode;
     public Task currentState = Task.PRELOAD_SPECIMEN;
-
-//    public Pose2d desiredPosition;
 
     public enum Task{
         // specimen
@@ -38,33 +40,29 @@ public class BessyAuto {
 
     private int runCount = 0;
 
-    private Pose startPos;
+    //  RED? idk do some fancy translation later or something
+    private final Pose startRed = new Pose(128, 113, Math.toRadians(90));
+    private final Pose launchRed = new Pose(104, 113, Math.toRadians(90));
 
-    public BessyAuto(CommandOpMode commandOpMode, Bessy.FieldPos startingPosition, Bessy.AllianceColor allianceColor, Bessy.Target target) {
+
+    public BessyAuto(CommandOpMode commandOpMode, Bessy.FieldPos startingPosition, Bessy.AllianceColor allianceColor) {
         opMode = commandOpMode;
         bessy = new Bessy(opMode, Bessy.OpModeType.AUTO, allianceColor, this);
-        bessy.setStartPosition(startingPosition, allianceColor);
-        bessy.target = target;
-        if(bessy.target == Bessy.Target.SPECIMENS)
-        {
-            currentState = Task.PRELOAD_SPECIMEN;
-            startPos = new Pose(0, 0, Math.toRadians(180));
-        } else
-        {
-            currentState = Task.PRELOAD_BASKET;
-            startPos = new Pose(0, 0, Math.toRadians(270));
-        }
-        bessy.setStartPosition(startPos);
+//        bessy.setStartPosition(startingPosition, allianceColor);
         additionalCycles = 0;
+
+        bessy.setStartPosition(startRed);
     }
 
     public void run() {
-        opMode.telemetry.addData("Current State", currentState);
-        opMode.telemetry.addData("Run Count", runCount++);
-        opMode.telemetry.addData("Cycle Count", additionalCycles);
-//        opMode.telemetry.addLine(String.format("Pose X: %.2f, Y: %.2f, Rot: %.2f", riptide.drive.getPoseEstimate().position.x,
-//                riptide.drive.getPoseEstimate().position.y, Math.toDegrees(riptide.drive.getPoseEstimate().heading.toDouble())));
-        opMode.telemetry.update();
+//        opMode.telemetry.addData("Current State", currentState);
+//        opMode.telemetry.addData("Run Count", runCount++);
+//        opMode.telemetry.addData("Cycle Count", additionalCycles);
+//        opMode.telemetry.update();
+
+        Path testA = new Path(new BezierLine(startRed, launchRed));
+        PathChain pathChain = bessy.follower.pathBuilder().addPath(testA).build();
+        opMode.schedule(new PedroFollowPath(bessy.follower, pathChain));
 
         switch (currentState) {
 
@@ -104,5 +102,9 @@ public class BessyAuto {
             default:
                 throw new IllegalStateException("Unexpected value: " + currentState);
         }
+        opMode.telemetry.addLine(String.format("Pose X: %.2f, Y: %.2f, Rot: %.2f", bessy.follower.getPose().getX(),
+                bessy.follower.getPose().getY(), Math.toDegrees(bessy.follower.getPose().getHeading())));
+        opMode.telemetry.update();
+        bessy.follower.update();
     }
 }

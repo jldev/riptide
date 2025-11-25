@@ -43,7 +43,7 @@ public class IntakeSubsystem extends SubsystemBase {
         mIntakeMotor.setRunMode(MotorEx.RunMode.RawPower);
         mIntakeMotor.setZeroPowerBehavior(Motor.ZeroPowerBehavior.BRAKE);
 
-        mIntakeMotor.motor.setDirection(DcMotorSimple.Direction.FORWARD);
+        mIntakeMotor.motor.setDirection(DcMotorSimple.Direction.REVERSE);
         mIntakeMotor.encoder.setDirection(Motor.Direction.REVERSE);
 
         opmode.telemetry.addLine("Intake Init");

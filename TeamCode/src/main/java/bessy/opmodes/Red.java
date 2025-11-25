@@ -7,12 +7,12 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import bessy.Bessy;
 
 @Config
-@Autonomous(group = "drive", name = "Specimen")
-public class Specimen extends CommandOpMode {
+@Autonomous(group = "drive", name = "Red")
+public class Red extends CommandOpMode {
     BessyAuto bessyAuto;
     @Override
     public void initialize() {
-        bessyAuto = new BessyAuto(this, Bessy.FieldPos.AU, Bessy.AllianceColor.RED, Bessy.Target.SPECIMENS);
+        bessyAuto = new BessyAuto(this, Bessy.FieldPos.AU, Bessy.AllianceColor.RED);
         bessyAuto.bessy.pushSamples = true;
     }
 

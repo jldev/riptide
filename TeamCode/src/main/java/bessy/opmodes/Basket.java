@@ -12,7 +12,7 @@ public class Basket extends CommandOpMode {
     BessyAuto bessyAuto;
     @Override
     public void initialize() {
-        bessyAuto = new BessyAuto(this, Bessy.FieldPos.AU, Bessy.AllianceColor.RED, Bessy.Target.SAMPLES);
+        bessyAuto = new BessyAuto(this, Bessy.FieldPos.AU, Bessy.AllianceColor.RED);
         bessyAuto.bessy.pushSamples = true;
     }
 

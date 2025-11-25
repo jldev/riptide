@@ -50,8 +50,8 @@ public class Teleop extends CommandOpMode {
         bessy.allOuttakeServo.whenPressed(bessy.outtakeSubsystem.ActivateServo(OuttakeSubsystem.ActiveServo.ALL));
 
         //     Outtake Speed Control
-        bessy.outtakePowerIncrease.whenPressed(bessy.outtakeSubsystem.ChangePowerBy(.1));
-        bessy.outtakePowerDecrease.whenPressed(bessy.outtakeSubsystem.ChangePowerBy(-.1));
+        bessy.outtakePowerIncrease.whenPressed(bessy.outtakeSubsystem.ChangePowerBy(.05));
+        bessy.outtakePowerDecrease.whenPressed(bessy.outtakeSubsystem.ChangePowerBy(-.05));
 
     }
 
