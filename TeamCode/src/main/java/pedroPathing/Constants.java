@@ -33,10 +33,10 @@ public class Constants {
             .leftRearMotorName("leftRear")
             .rightFrontMotorName("rightFront")
             .rightRearMotorName("rightRear")
-            .leftFrontMotorDirection(DcMotorSimple.Direction.REVERSE)
+            .leftFrontMotorDirection(DcMotorSimple.Direction.FORWARD)
             .leftRearMotorDirection(DcMotorSimple.Direction.FORWARD)
-            .rightFrontMotorDirection(DcMotorSimple.Direction.FORWARD)
-            .rightRearMotorDirection(DcMotorSimple.Direction.FORWARD)
+            .rightFrontMotorDirection(DcMotorSimple.Direction.REVERSE)
+            .rightRearMotorDirection(DcMotorSimple.Direction.REVERSE)
             .xVelocity(78.6167)
             .yVelocity(63.3578);
 
@@ -51,9 +51,9 @@ public class Constants {
                     .leftEncoder_HardwareMapName("leftFront")
                     .rightEncoder_HardwareMapName("rightRear")
                     .strafeEncoder_HardwareMapName("strafeEncoder")
-                    .leftEncoderDirection(Encoder.REVERSE)
-                    .rightEncoderDirection(Encoder.FORWARD)
-                    .strafeEncoderDirection(Encoder.FORWARD);
+                    .leftEncoderDirection(Encoder.FORWARD)
+                    .rightEncoderDirection(Encoder.REVERSE)
+                    .strafeEncoderDirection(Encoder.REVERSE);
 
     public static PathConstraints pathConstraints = new PathConstraints(
             0.995,

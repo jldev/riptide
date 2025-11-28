@@ -44,7 +44,7 @@ public class BessyAuto {
     private final Pose startRed = new Pose(128, 113, Math.toRadians(90));
     private final Pose launchRed = new Pose(104, 113, Math.toRadians(90));
 
-
+    private boolean started = false;
     public BessyAuto(CommandOpMode commandOpMode, Bessy.FieldPos startingPosition, Bessy.AllianceColor allianceColor) {
         opMode = commandOpMode;
         bessy = new Bessy(opMode, Bessy.OpModeType.AUTO, allianceColor, this);
@@ -52,6 +52,7 @@ public class BessyAuto {
         additionalCycles = 0;
 
         bessy.setStartPosition(startRed);
+        started = false;
     }
 
     public void run() {
@@ -60,9 +61,12 @@ public class BessyAuto {
 //        opMode.telemetry.addData("Cycle Count", additionalCycles);
 //        opMode.telemetry.update();
 
-        Path testA = new Path(new BezierLine(startRed, launchRed));
-        PathChain pathChain = bessy.follower.pathBuilder().addPath(testA).build();
-        opMode.schedule(new PedroFollowPath(bessy.follower, pathChain));
+        if(!started) {
+            started = true;
+            Path testA = new Path(new BezierLine(startRed, launchRed));
+            PathChain pathChain = bessy.follower.pathBuilder().addPath(testA).setLinearHeadingInterpolation(startRed.getHeading(), launchRed.getHeading()) .build();
+            opMode.schedule(new PedroFollowPath(bessy.follower, pathChain));
+        }
 
         switch (currentState) {
 

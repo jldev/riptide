@@ -38,7 +38,7 @@ public class BacknForth extends CommandOpMode {
         bessy = new Bessy(this, Bessy.OpModeType.AUTO, Bessy.AllianceColor.RED);
 //        Pose2d startPos = new Pose2d(0, 0, Math.toRadians(180));
 //        riptide.setStartPosition(startPos);
-        bessy.setStartPosition(startRed);
+        bessy.setStartPosition(testWaypointA);
         started = false;
     }
 
@@ -50,13 +50,18 @@ public class BacknForth extends CommandOpMode {
             telemetry.addLine("Started");
             telemetry.update();
 
-//            Path testA = new Path(new BezierLine(testWaypointA, testWaypointB));
-//            Path testB = new Path(new BezierLine(testWaypointB, testWaypointC));
-//            PathChain pathChain = bessy.follower.pathBuilder().addPath(testA).addPath(testB).build();
+            Path testA = new Path(new BezierLine(testWaypointA, testWaypointB));
+            Path testB = new Path(new BezierLine(testWaypointB, testWaypointC));
+            PathChain pathChain = bessy.follower.pathBuilder()
+                    .addPath(testA).setLinearHeadingInterpolation(testWaypointA.getHeading(), testWaypointB.getHeading())
+                    .addPath(testB).setLinearHeadingInterpolation(testWaypointB.getHeading(), testWaypointC.getHeading())
+                    .build();
 
-            //  Below is in BessyAuto
-            Path testA = new Path(new BezierLine(startRed, launchRed));
-            PathChain pathChain = bessy.follower.pathBuilder().addPath(testA).build();
+
+//            Path testA = new Path(new BezierLine(testWaypointB, testWaypointC));
+//            PathChain pathChain = bessy.follower.pathBuilder()
+//                    .addPath(testA).setLinearHeadingInterpolation(testWaypointB.getHeading(), testWaypointC.getHeading())
+//                    .build();
 
             // you can keep adding paths here check https://pedropathing.com/docs/pathing/reference/path-builder
             this.schedule(new PedroFollowPath(bessy.follower, pathChain));

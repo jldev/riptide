@@ -122,6 +122,8 @@ public BessyAuto auto;
         this.currentPos = pos;
         follower.setStartingPose(this.currentPos);
     }
+
+
         //Start positions for each auto placement
     public void setStartPosition(FieldPos fp, AllianceColor ac) {
 
